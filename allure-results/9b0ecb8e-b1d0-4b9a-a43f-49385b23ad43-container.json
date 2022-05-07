@@ -1,0 +1,1 @@
+{"uuid":"9b0ecb8e-b1d0-4b9a-a43f-49385b23ad43","name":"com.greencity.auto.tests.econews.GetEcoNewsTests","children":["b3ec6252-6862-4cdd-830e-50d310b859ea"],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1651944915313,"stop":1651944920214}],"afters":[],"start":1651944915284,"stop":1651944924347}
