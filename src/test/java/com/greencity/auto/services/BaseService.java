@@ -16,7 +16,7 @@ public class BaseService {
     protected static RequestSpecification getRequestSpec(String uri) {
         return new RequestSpecBuilder()
                 .setBaseUri(uri)
-                .addHeader("Authorization", Authenticator.getAuthToken())
+                .addHeader("Authorization","Bearer " + Authenticator.getAuthToken())
                 .addHeader("Host", "greencity.azurewebsites.net")
                 .addHeader("Accept", "application/json, text/plain, */*")
                 .addHeader("Content-Type", "multipart/form-data; boundary=----WebKitFormBoundarydxsi6EEVZMtrnlhj")

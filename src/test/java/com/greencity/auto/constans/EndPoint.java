@@ -10,7 +10,11 @@ public enum EndPoint {
     GET_THREE_LATEST_NEWS("/econews/newest"),
     GET_NEWS_BY_TAG("/econews/tags"),
     GET_ALL_TAGS("/econews/tags/all"),
-    EDIT_NEWS("/econews/update");
+    EDIT_NEWS("/econews/update"),
+    COMMENT_NEWS("/econews/comments/"),
+    ACTIVE_COMMENTS_NEWS("/econews/comments/active"),
+    COUNT_COMMENTS_NEWS("/econews/comments/count/comments/"),
+    LIKE_COMMENT_NEWS("/econews/comments/like");
 
     private final String endpoint;
 

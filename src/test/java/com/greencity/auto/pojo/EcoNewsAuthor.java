@@ -10,4 +10,5 @@ import lombok.Getter;
 public class EcoNewsAuthor {
     private int id;
     private String name;
+    private String userProfilePicturePath;
 }

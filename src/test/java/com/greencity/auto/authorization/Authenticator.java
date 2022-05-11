@@ -30,6 +30,8 @@ public class Authenticator {
                 .then().log().all()
                 .extract()
                 .response();
-        return AUTH_TYPE + response.jsonPath().getString("accessToken");
+        final String tokenValue = response.jsonPath().getString("accessToken");
+        System.setProperty("token", tokenValue);
+        return tokenValue;
     }
 }
