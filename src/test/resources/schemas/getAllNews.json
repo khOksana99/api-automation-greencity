@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "page": "array",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "creationDate": {
+      "type": "string"
+    },
+    "imagePath": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array"
+    },
+    "likes": {
+      "type": "integer"
+    },
+    "countComments": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "content",
+    "author",
+    "creationDate",
+    "countComments",
+    "likes",
+    "tags"
+  ]
+}
