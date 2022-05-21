@@ -88,14 +88,6 @@ jobs:
       - store_artifacts:
           path: target/site/allure-maven-plugin
           destination: Allure
-      - when:
-          condition: << pipeline.parameters.slackNotify >>
-          steps:
-            - slack/status:
-                channel: $SLACK_CHANNEL
-                fail_only: false
-                only_for_branches: master
-                webhook: $SLACK_WEBHOOK
 
 workflows:
   version: 2
