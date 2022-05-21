@@ -17,9 +17,14 @@ public enum EndPoint {
     COUNT_COMMENTS_NEWS("/econews/comments/count/comments/"),
     LIKE_COMMENT_NEWS("/econews/comments/like"),
     ///endregion
+    ///region habit
     HABIT("/habit"),
     SHOPPING_LIST("/shopping-list"),
-    TAGS("/tags");
+    TAGS("/tags"),
+    ASSIGN_HABIT("/habit/assign/"),
+    UNASSIGN_HABIT("/habit/assign/delete/"),
+    COMPLETE_HABIT("/enroll/");
+    ///endregion
 
     private final String endpoint;
 
