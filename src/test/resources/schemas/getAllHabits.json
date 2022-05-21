@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "page": [
+    {
+      "type": "object",
+      "properties": {
+        "defaultDuration": {
+          "type": "integer"
+        },
+        "habitTranslation": {
+          "type": "object",
+          "properties": {
+            "description" : {
+              "type": "string"
+            },
+            "habitItem": {
+              "type": "string"
+            },
+            "languageCode": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "id": {
+          "type": "integer"
+        },
+        "shoppingListItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "text": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "defaultDuration",
+        "shoppingListItems"
+      ]
+    }
+  ]
+}

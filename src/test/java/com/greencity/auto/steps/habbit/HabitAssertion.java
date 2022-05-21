@@ -44,4 +44,10 @@ public class HabitAssertion extends CommonAssertion<HabitSteps> {
         steps.getResponse().then().body("id", equalTo(id));
         return steps;
     }
+
+    @Step("Verify habit is inprogress")
+    public HabitSteps verifyHabitIsInProgress() {
+        steps.getResponse().then().body("status", equalTo("INPROGRESS"));
+        return steps;
+    }
 }
