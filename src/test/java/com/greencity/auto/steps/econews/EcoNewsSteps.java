@@ -24,6 +24,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return assertion;
     }
 
+    /**
+     * Get news by id
+     * @param id eco news id
+     * @return
+     */
     @Step("Get news by id {id}")
     public <T> EcoNewsSteps getNewsById(T id) {
         response = given()
@@ -36,7 +41,10 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
-
+    /**
+     * Get all eco news
+     * @return this
+     */
     @Step("Get all news")
     public <T> EcoNewsSteps getAllNews() {
         response =
@@ -50,6 +58,10 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get news created by user
+     * @return this
+     */
     @Step("Get news created by current user")
     public <T> EcoNewsSteps getNewsCreatedByCurrentUser() {
         response = given()
@@ -60,6 +72,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Edit eco news
+     * @param ecoNews
+     * @return this
+     */
     @Step("Edit news")
     public <T> EcoNewsSteps editNews(EcoNews ecoNews) {
         response = given()
@@ -71,6 +88,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Delete eco news
+     * @param id eco news id
+     * @return this
+     */
     @Step("Delete news by id{id}")
     public <T> EcoNewsSteps deleteNews(T id) {
         response = given()
@@ -81,6 +103,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Like eco news
+     * @param id eco news id
+     * @return this
+     */
     @Step("Like news")
     public <T> EcoNewsSteps likeNews(T id) {
         response = given()
@@ -92,6 +119,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Is liked by user
+     * @param id eco news id
+     * @return this
+     */
     @Step("Like news")
     public <T> EcoNewsSteps isLikedByUser(T id) {
         response = given()
@@ -103,6 +135,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get likes count
+     * @param id eco news id
+     * @return this
+     */
     @Step("Like count")
     public <T> EcoNewsSteps likesCount(T id) {
         response = given()
@@ -114,6 +151,10 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get last three eco news
+     * @return this
+     */
     @Step("Get three last eco news")
     public <T> EcoNewsSteps getThreeLastEcoNews() {
         response = given()
@@ -124,6 +165,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get eco news by tag title
+     * @param tag tag title
+     * @return this
+     */
     @Step("Get three last eco news")
     public <T> EcoNewsSteps getNewsByTag(String tag) {
         response = given()
@@ -135,6 +181,10 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get all tags
+     * @return this
+     */
     @Step("Get all tags")
     private <T> EcoNewsSteps getAllNewsTags() {
         response = given()
@@ -145,6 +195,11 @@ public class EcoNewsSteps extends BaseSteps<EcoNewsSteps> {
         return this;
     }
 
+    /**
+     * Get likes count
+     * @return likes count
+     */
+    @Step("Get likes count")
     public int getLikesCount() {
         return Integer.parseInt(response.then().extract().asString());
     }

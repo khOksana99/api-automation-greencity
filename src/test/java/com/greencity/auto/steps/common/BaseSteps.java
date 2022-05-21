@@ -28,7 +28,10 @@ public class BaseSteps<T extends BaseSteps<T>> {
         return new CommonAssertion<>((T)this);
     }
 
-
+    /**
+     *
+     * @return basic specification for all methods
+     */
     @Step("Create basic request")
     protected RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder()

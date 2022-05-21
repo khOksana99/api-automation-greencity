@@ -1,12 +1,15 @@
 package com.greencity.auto.steps.common;
 
-import com.greencity.auto.steps.econews.EcoNewsCommentSteps;
 import io.qameta.allure.Step;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+/**
+ * CommonAssertion class is the base class for all the Assertion classes, containing
+ * common methods and fields.
+ */
 public class CommonAssertion<T extends BaseSteps<T>> {
     protected final T steps;
 
@@ -67,6 +70,14 @@ public class CommonAssertion<T extends BaseSteps<T>> {
         return checkTitleOfErrorMessage(String.format(textOfTitle, id));
     }
 
+    /**
+     * Verifies 2 strings on equals method
+     *
+     * @param startText first text to compare
+     * @param endText second text to compare
+     * @return T this
+     */
+    @Step("Check 2 text")
     public T verifyTextChanged(String startText, String endText) {
         assertThat(startText, equalTo(endText));
         return steps;
