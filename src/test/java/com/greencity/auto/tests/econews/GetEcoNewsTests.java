@@ -1,74 +1,50 @@
 package com.greencity.auto.tests.econews;
 
-import com.greencity.auto.authorization.AuthenticationData;
-import com.greencity.auto.pojo.EcoNews;
 import io.qameta.allure.Feature;
-import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static com.greencity.auto.services.EcoNewsService.*;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 
 @Feature("Get eco news")
-public class GetEcoNewsTests {
-    private final Integer CRESTED_BY_USER_NEWS_ID = 61;
-    private String tag;
-
-    @BeforeClass
-    public void setUp() {
-        tag = getFirstTag();
-    }
+public class GetEcoNewsTests extends BaseEconewsTest {
+    private final Integer CREATED_BY_USER_NEWS = 61;
+    private final String tag = "NEWS";
 
     @Test(description = "Get all eco news")
     public void getAllEcoNewsTest() {
-        Response response = getAllNews();
-
-        response.then()
+        ecoNews
+                .getAllNews()
                 .assertThat()
-                .statusCode(SC_OK);
-        List<EcoNews> list = getEconewsList();
-        assertThat(list.size(), is(response.jsonPath().getInt("totalElements")));
+                .statusCodeIs(SC_OK)
+                .assertThat()
+                .getAllEcoNewsSchemaIsCorrect();
     }
 
     @Test(description = "Get eco news by id")
     public void getEcoNewsByIdTest() {
-        getNewsById(CRESTED_BY_USER_NEWS_ID)
-                .then()
-                .assertThat()
-                .statusCode(SC_OK)
-                .body("id", is(CRESTED_BY_USER_NEWS_ID));
+       ecoNews
+               .getNewsById(CREATED_BY_USER_NEWS)
+               .assertThat()
+               .statusCodeIs(SC_OK);
     }
 
     @Test(description = "Get eco news created by current user1")
     public void getEcoNewsCreatedByCurrentUser() {
-        Response response = getNewsCreatedByCurrentUser();
-        response
-                .then()
+        ecoNews
+                .getNewsCreatedByCurrentUser()
                 .assertThat()
-                .statusCode(SC_OK);
-
-        response.jsonPath().getList("author.name").forEach(
-                user_name -> assertThat(user_name, equalTo(new AuthenticationData().getUserName()))
-        );
+                .statusCodeIs(SC_OK)
+                .assertThat()
+                .verifyEcoNEwsAreCreatedByUser();
     }
 
     @Test(description = "Get news by tag")
     public void verifyGetEcoNewsByTag() {
-        Response response = getNewsByTag(tag);
-
-        response
-                .then()
+        ecoNews
+                .getNewsByTag(tag)
                 .assertThat()
-                .statusCode(SC_OK);
-
-        response.jsonPath().getList("page.tags").forEach(
-                tag -> assertThat(tag, equalTo(tag))
-        );
+                .statusCodeIs(SC_OK)
+                .assertThat()
+                .verifyTags(tag);
     }
 }

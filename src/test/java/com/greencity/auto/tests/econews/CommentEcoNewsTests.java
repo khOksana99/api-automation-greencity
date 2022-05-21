@@ -1,75 +1,49 @@
 package com.greencity.auto.tests.econews;
 
-import com.greencity.auto.pojo.Comment;
 import com.greencity.auto.utils.Util;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.greencity.auto.services.EcoNewsCommentService.*;
-import static com.greencity.auto.services.EcoNewsService.getLastEcoNewsId;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.Matchers.equalTo;
 
 public class CommentEcoNewsTests extends BaseCommentTest {
-    private int newsId;
-    private String commentText = "comment" + Util.getCurrentDateTime();
-    private String editedCommentText = "editedComment" + Util.getCurrentDateTime();
-    private int likedComment;
-    private int deletedComment;
-    private int editedComment;
-
-    @BeforeClass
-    public void setUp() {
-        newsId = getLastEcoNewsId();
-        likedComment = getCreatedCommentId(newsId, commentText);
-        deletedComment = getCreatedCommentId(newsId, commentText);
-        editedComment = getCreatedCommentId(newsId, commentText);
-
-        commentsIds.add(likedComment);
-        commentsIds.add(deletedComment);
-        commentsIds.add(editedComment);
-    }
+    private final String editedCommentText = "editedComment" + Util.getCurrentDateTime();
 
     @Test(description = "Comment eco news")
     public void commentEcoNewsTest() {
-        commentEcoNews(newsId, commentText)
-                .then()
+        int id = ecoNewsCommentSteps.commentEcoNews(newsId, commentText).getCreatedCommentId();
+        System.out.println(id);
+        ecoNewsCommentSteps
+                .commentEcoNews(newsId, commentText)
                 .assertThat()
-                .statusCode(SC_CREATED)
-                .body("text", equalTo(commentText));
+                .statusCodeIs(SC_CREATED)
+                .assertThat()
+                .verifyEcoNewsCommentText(commentText);
     }
 
     @Test(description = "Delete comment eco news")
     public void deleteCommentEcoNewsTest() {
+        ecoNewsCommentSteps.
         deleteCommentEcoNews(deletedComment)
-                .then()
                 .assertThat()
-                .statusCode(SC_OK);
+                .statusCodeIs(SC_OK);
     }
 
     @Test(description = "Like comment eco news")
     public void likeCommentEcoNewsTest() {
+        ecoNewsCommentSteps.
         likeCommentEcoNews(likedComment)
-                .then()
                 .assertThat()
-                .statusCode(SC_OK);
+                .statusCodeIs(SC_OK);
     }
 
     @Test(description = "Edit comment eco news")
     public void editCommentTest() {
-        editCommentEcoNews(editedComment, newsId, editedCommentText)
-                .then()
+        ecoNewsCommentSteps
+                .editCommentEcoNews(editedComment, newsId, editedCommentText)
                 .assertThat()
-                .statusCode(SC_OK);
-
-        String commentTextAfterEditing = getAllCommentsEcoNews(newsId).jsonPath().getList("page", Comment.class)
-                .stream()
-                .filter(comment -> comment.getId().equals(editedComment))
-                .findFirst().orElse(null)
-                .getText();
-
-        Assert.assertEquals(commentTextAfterEditing, editedCommentText);
+                .statusCodeIs(SC_OK)
+                .assertThat()
+                .verifyTextChanged(ecoNewsCommentSteps.getTextOfCommentById(newsId, editedComment), editedCommentText);
     }
 }
