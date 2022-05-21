@@ -6,7 +6,7 @@ parameters:
   suite:
     type: string
     default: regression
-  username:
+  email:
     type: string
     default: $USERNAME
   password:
@@ -32,16 +32,28 @@ jobs:
           name: Test running
           command: mvn
             -Dsuite=<< pipeline.parameters.suite >>
-            -Dusername=<< pipeline.parameters.username >>
+            -Dusername=<< pipeline.parameters.email >>
             -Dpassword=<< pipeline.parameters.password >>
             clean verify site
       - run:
-          name: Generate allure report
-          command: mvn allure:report
-      - store_test_results:
-          path: target/surefire-reports/junitreports/
+          name: Allure archive download
+          command: curl -L https://github.com/allure-framework/allure2/releases/download/2.13.1/allure-commandline-2.13.1.zip -o /tmp/allure.zip
+      - run:
+          name: Archive extraction
+          command: unzip /tmp/allure.zip
+      - run:
+          name: Allure installation
+          command: sudo mv allure-2.13.1 /usr/local/share/allure
+      - run:
+          name: Allure binary symlinking
+          command: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+      - run:
+          name: Allure report generation (allure-results -> allure-report)
+          command: mvn io.qameta.allure:allure-maven:report
+          when: always
       - store_artifacts:
-          path: target/site/allure-maven-plugin/
+          path: target/site/allure-maven-plugin
+          destination: Report/Allure
 
   schedule_run:
     docker:
@@ -61,7 +73,7 @@ jobs:
           name: Test running
           command: mvn
             -Dsuite=<< pipeline.parameters.suite >>
-            -Dusername=<< pipeline.parameters.username >>
+            -Dusername=<< pipeline.parameters.email >>
             -Dpassword=<< pipeline.parameters.password >>
             clean verify site
       - run:
