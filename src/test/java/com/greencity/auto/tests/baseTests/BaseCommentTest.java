@@ -1,4 +1,4 @@
-package com.greencity.auto.tests.econews;
+package com.greencity.auto.tests.baseTests;
 
 import com.greencity.auto.steps.econews.EcoNewsCommentSteps;
 import com.greencity.auto.utils.Util;
