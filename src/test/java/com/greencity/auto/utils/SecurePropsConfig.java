@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SecurePropsConfig {
-    public String email() {
-        return System.getProperty("email") != null
-                ? System.getProperty("email")
-                : getSecuredPropertyValueByKey("email");
+    public String username() {
+        return System.getProperty("username") != null
+                ? System.getProperty("username")
+                : getSecuredPropertyValueByKey("username");
     }
 
     public String password() {

@@ -6,12 +6,12 @@ parameters:
   suite:
     type: string
     default: regression
-  email:
+  username:
     type: string
-    default: $email
+    default: $USERNAME
   password:
     type: string
-    default: $password
+    default: $PASSWORD
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
           name: Test running
           command: mvn
             -Dsuite=<< pipeline.parameters.suite >>
-            -Dusername=<< pipeline.parameters.email >>
+            -Dusername=<< pipeline.parameters.username >>
             -Dpassword=<< pipeline.parameters.password >>
             clean verify site
       - run:
@@ -73,7 +73,7 @@ jobs:
           name: Test running
           command: mvn
             -Dsuite=<< pipeline.parameters.suite >>
-            -Dusername=<< pipeline.parameters.email >>
+            -Dusername=<< pipeline.parameters.username >>
             -Dpassword=<< pipeline.parameters.password >>
             clean verify site
       - run:
