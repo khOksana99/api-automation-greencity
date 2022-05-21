@@ -1,5 +1,6 @@
 package com.greencity.auto.tests.econews;
 
+import com.greencity.auto.tests.baseTests.BaseEconewsTest;
 import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 

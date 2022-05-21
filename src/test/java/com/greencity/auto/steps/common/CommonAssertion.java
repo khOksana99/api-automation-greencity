@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 
 /**
  * CommonAssertion class is the base class for all the Assertion classes, containing
@@ -52,8 +53,7 @@ public class CommonAssertion<T extends BaseSteps<T>> {
      */
     @Step("Check title of error message: {textOfTitle}")
     public T checkTitleOfErrorMessage(String textOfTitle) {
-        steps.getResponse().then().assertThat().body("error.title", equalTo(textOfTitle));
-        //noinspection unchecked
+        steps.getResponse().then().assertThat().body("message", startsWith(textOfTitle));
         return steps;
     }
 

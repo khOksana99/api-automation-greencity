@@ -1,5 +1,6 @@
 package com.greencity.auto.tests.econews;
 
+import com.greencity.auto.tests.baseTests.BaseCommentTest;
 import com.greencity.auto.utils.Util;
 import org.testng.annotations.Test;
 

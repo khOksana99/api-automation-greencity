@@ -51,9 +51,9 @@ public class HabitSteps extends BaseSteps<HabitSteps> {
     public <T> HabitSteps getHabitById(T id) {
         response = given()
                 .spec(getRequestSpec())
-                .when()
+                .when().log().all()
                 .get(EndPoint.HABIT.getEndpoint() + "/" + id)
-                .then()
+                .then().log().all()
                 .extract()
                 .response();
         return this;

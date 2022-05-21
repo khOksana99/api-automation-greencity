@@ -126,6 +126,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.sskorol</groupId>
+            <artifactId>test-data-supplier</artifactId>
+            <version>1.7.0</version>
+        </dependency>
 
     </dependencies>
 </project>
