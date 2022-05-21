@@ -29,7 +29,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suites/regression.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/regression.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <allure.results.directory>${basedir}/target/allure-results</allure.results.directory>
