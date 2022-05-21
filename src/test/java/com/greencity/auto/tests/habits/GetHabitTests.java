@@ -3,10 +3,12 @@ package com.greencity.auto.tests.habits;
 import com.greencity.auto.constans.ErrorMsg;
 import com.greencity.auto.dataprovider.CommonDataProviders;
 import com.greencity.auto.tests.baseTests.BaseHabitsTest;
+import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 
 import static org.apache.http.HttpStatus.*;
 
+@Feature("Get habits")
 public class GetHabitTests extends BaseHabitsTest {
     @Test
     public void getAllHabitsTest() {

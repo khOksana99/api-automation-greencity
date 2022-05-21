@@ -2,11 +2,13 @@ package com.greencity.auto.tests.econews;
 
 import com.greencity.auto.tests.baseTests.BaseCommentTest;
 import com.greencity.auto.utils.Util;
+import io.qameta.allure.Feature;
 import org.testng.annotations.Test;
 
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
 
+@Feature("Comment eco news")
 public class CommentEcoNewsTests extends BaseCommentTest {
     private final String editedCommentText = "editedComment" + Util.getCurrentDateTime();
 
