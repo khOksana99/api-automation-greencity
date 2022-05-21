@@ -101,7 +101,6 @@ workflows:
   version: 2
 
   commit-workflow:
-    unless: << pipeline.parameters.apiTrigger >>
     jobs:
       - build:
           filters:
@@ -118,10 +117,5 @@ workflows:
             branches:
               only:
                 - master
-    jobs:
-      - build
-
-  on-demand-workflow:
-    when: << pipeline.parameters.apiTrigger >>
     jobs:
       - build
