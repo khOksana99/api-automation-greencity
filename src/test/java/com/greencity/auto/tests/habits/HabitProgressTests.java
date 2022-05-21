@@ -3,6 +3,7 @@ package com.greencity.auto.tests.habits;
 import com.greencity.auto.constans.ErrorMsg;
 import com.greencity.auto.dataprovider.HabitDataProvider;
 import com.greencity.auto.tests.baseTests.BaseHabitsTest;
+import io.qameta.allure.Feature;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 
+@Feature("Habit progress")
 public class HabitProgressTests extends BaseHabitsTest {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {

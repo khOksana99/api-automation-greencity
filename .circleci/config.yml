@@ -1,0 +1,88 @@
+version: 2.1
+
+orbs:
+  slack: circleci/slack@3.4.2
+parameters:
+  suite:
+    type: string
+    default: regression
+  username:
+    type: string
+    default: $USERNAME
+  password:
+    type: string
+    default: $PASSWORD
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11-jdk-browsers
+
+    working_directory: ~/api-automation-greencity
+
+    environment:
+      MAVEN_OPTS: -Xmx4200m -Xms1024m
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - $CIRCLE_PROJECT_REPONAME-{{ checksum "pom.xml" }}
+            - $CIRCLE_PROJECT_REPONAME-
+      - run: mvn dependency:go-offline compile compiler:testCompile
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: m2-{{ checksum "pom.xml" }}
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+      - run:
+          name: Test running
+          command: mvn
+            -Dsuite=<< pipeline.parameters.suite >>
+            -Dusername=<< pipeline.parameters.username >>
+            -Dpassword=<< pipeline.parameters.password >>
+            clean verify site
+      - run:
+          name: Allure archive download
+          command: curl -L https://github.com/allure-framework/allure2/releases/download/2.13.1/allure-commandline-2.13.1.zip -o /tmp/allure.zip
+      - run:
+          name: Archive extraction
+          command: unzip /tmp/allure.zip
+      - run:
+          name: Allure installation
+          command: sudo mv allure-2.13.1 /usr/local/share/allure
+      - run:
+          name: Allure binary symlinking
+          command: sudo ln -s /usr/local/share/allure/bin/allure /usr/local/bin/allure
+      - run:
+          name: Allure report generation (allure-results -> allure-report)
+          command: mvn io.qameta.allure:allure-maven:report
+          when: always
+      - store_artifacts:
+          path: target/site/allure-maven-plugin
+          destination: Report/Allure
+
+workflows:
+  version: 2
+
+  commit-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - ci/cd
+
+  schedule-workflow:
+    triggers:
+      - schedule:
+          cron: "0 3 * * 1,4"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build

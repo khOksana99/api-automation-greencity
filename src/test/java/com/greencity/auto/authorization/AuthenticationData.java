@@ -7,10 +7,10 @@ import lombok.Data;
 public class AuthenticationData {
     private final String email;
     private final String password;
-    private final String userName = "Test123";
+    private final String nikName = "Test123";
 
     public AuthenticationData() {
-        this.email = Util.SECURE_PROPS.email();
+        this.email = Util.SECURE_PROPS.username();
         this.password = Util.SECURE_PROPS.password();
     }
 

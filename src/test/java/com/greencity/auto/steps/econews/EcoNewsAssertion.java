@@ -39,7 +39,7 @@ public class EcoNewsAssertion extends CommonAssertion<EcoNewsSteps> {
     public EcoNewsSteps verifyEcoNewsAreCreatedByUser() {
         getListFromResponse("author.name").stream()
                 .forEach(
-                        user_name -> assertThat(user_name, equalTo(new AuthenticationData().getUserName())));
+                        user_name -> assertThat(user_name, equalTo(new AuthenticationData().getNikName())));
         return steps;
     }
 
