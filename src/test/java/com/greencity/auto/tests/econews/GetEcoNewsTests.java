@@ -35,7 +35,7 @@ public class GetEcoNewsTests extends BaseEconewsTest {
                 .assertThat()
                 .statusCodeIs(SC_OK)
                 .assertThat()
-                .verifyEcoNEwsAreCreatedByUser();
+                .verifyEcoNewsAreCreatedByUser();
     }
 
     @Test(description = "Get news by tag")

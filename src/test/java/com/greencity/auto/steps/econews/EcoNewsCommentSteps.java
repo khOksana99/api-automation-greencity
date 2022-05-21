@@ -17,7 +17,6 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
 
     /**
      * A method used to begin assertion
-     *
      * @return EcoNewsAssertion object
      */
     @Override
@@ -25,6 +24,12 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return assertion;
     }
 
+    /**
+     * Comment eco news
+     * @param id eco news id
+     * @param text text of comment
+     * @return EcoNewsCommentSteps
+     */
     @Step("Comment eco news")
     public <T> EcoNewsCommentSteps commentEcoNews(int id, String text) {
         response = given()
@@ -38,6 +43,13 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Edit comment eco news
+     * @param  commentId id of comment
+     * @param newsId eco news id
+     * @param text text of comment
+     * @return EcoNewsCommentSteps
+     */
     @Step("Edit comment eco news")
     public <T> EcoNewsCommentSteps editCommentEcoNews(int commentId, int newsId, String text) {
         response = given()
@@ -51,6 +63,11 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Delete comment
+     * @param commentId id of comment
+     * @return EcoNewsCommentSteps
+     */
     @Step("Delete comment eco news")
     public <T> EcoNewsCommentSteps deleteCommentEcoNews(int commentId) {
         response = given()
@@ -64,6 +81,11 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Get all comments
+     * @param newsId eco news id
+     * @return EcoNewsCommentSteps
+     */
     @Step("Get all comments eco news")
     public <T> EcoNewsCommentSteps getAllCommentsEcoNews(int newsId) {
         response = given()
@@ -77,6 +99,11 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Count of comments
+     * @param newsId eco news id
+     * @return EcoNewsCommentSteps
+     */
     @Step("Count comments eco news")
     public <T> EcoNewsCommentSteps countCommentsEcoNews(int newsId) {
         response = given()
@@ -89,6 +116,11 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Like comment
+     * @param commentId
+     * @return EcoNewsCommentSteps
+     */
     @Step("Like comment eco news")
     public <T> EcoNewsCommentSteps likeCommentEcoNews(int commentId) {
         response = given()
@@ -102,11 +134,22 @@ public class EcoNewsCommentSteps extends BaseSteps<EcoNewsCommentSteps> {
         return this;
     }
 
+    /**
+     * Get id of created comment
+     * @return id
+     */
     @Step("Get id of last eco news")
     public Integer getCreatedCommentId() {
         return response.jsonPath().getInt("id");
     }
 
+    /**
+     * Get text of comment by id
+     * @param newsId eco news id
+     * @param commentedId comment id
+     * @return text of comment
+     */
+    @Step("Get comment text by id")
     public String getTextOfCommentById(int newsId, int commentedId) {
        return getAllCommentsEcoNews(newsId).getResponse().jsonPath().getList("page", Comment.class)
                 .stream()
