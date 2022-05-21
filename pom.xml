@@ -47,7 +47,9 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.10.0</version>
                 <configuration>
-                    <resultsDirectory>/home/circleci/api-automation-greencity/target/allure-results</resultsDirectory>
+                    <systemPropertyVariables>
+                          <allure.results.directory>${basedir}/target/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
