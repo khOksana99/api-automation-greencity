@@ -8,10 +8,10 @@ parameters:
     default: regression
   email:
     type: string
-    default: $USERNAME
+    default: $email
   password:
     type: string
-    default: $PASSWORD
+    default: $password
 
 jobs:
   build:
