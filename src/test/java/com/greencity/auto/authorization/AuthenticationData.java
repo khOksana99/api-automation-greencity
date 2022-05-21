@@ -5,19 +5,19 @@ import lombok.Data;
 
 @Data
 public class AuthenticationData {
-    private final String username;
+    private final String email;
     private final String password;
     private final String nikName = "Test123";
 
     public AuthenticationData() {
-        this.username = Util.SECURE_PROPS.username();
+        this.email = Util.SECURE_PROPS.username();
         this.password = Util.SECURE_PROPS.password();
     }
 
     @Override
     public String toString() {
         return "{" +
-                "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
