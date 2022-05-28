@@ -11,7 +11,7 @@ import java.util.List;
 public class BaseCommentTest {
     protected List<Integer> commentsIds = new ArrayList<>();
     protected EcoNewsCommentSteps ecoNewsCommentSteps;
-    protected final int newsId = 41;
+    protected final int newsId = 5;
     protected final String commentText = "comment" + Util.getCurrentDateTime();
     protected int likedComment;
     protected int deletedComment;
