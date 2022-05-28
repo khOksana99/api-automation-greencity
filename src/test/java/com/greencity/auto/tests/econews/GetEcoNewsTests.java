@@ -10,7 +10,7 @@ import static org.apache.http.HttpStatus.*;
 
 @Feature("Get eco news")
 public class GetEcoNewsTests extends BaseEconewsTest {
-    private final Integer CREATED_BY_USER_NEWS = 61;
+    private final Integer CREATED_BY_USER_NEWS = 5;
     private final String tag = "NEWS";
 
     @Test(description = "Get all eco news")
